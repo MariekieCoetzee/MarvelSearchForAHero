@@ -6,7 +6,6 @@ export default () => {
   const [results, setResults] = useState([]);
 
   const searchMarvel = async (searchChar) => {
-console.log(searchChar);
     setErrorMessage(null);
     try {
       const items = await marvelApi(searchChar);
@@ -17,6 +16,7 @@ console.log(searchChar);
         return [searchMarvel, results, errorMessage];
       } else 
           if(items.code === 200 && items.data){
+              setErrorMessage(null);
           setResults(items.data.results);
           return [searchMarvel, results, errorMessage]
       }else if (items.code === 409){

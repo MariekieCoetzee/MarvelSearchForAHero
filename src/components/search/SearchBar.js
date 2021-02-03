@@ -2,18 +2,9 @@ import React, { useState } from "react";
 import { View, TextInput, StyleSheet, Text } from "react-native";
 //import Feedback from "./common/Feedback";
 import Icon from "react-native-vector-icons/Feather";
-import useAPIResults from "../../hooks/useAPIResults";
-
 
 const SearchBar = ({ term, onTermChange }) => {
-  
-const [
-  searchMarvel,
-  results,
-  errorMessage,
-] = useAPIResults();
 
-console.log(results);
   return (
     <View>
       <View style={styles.backgroundStyle}>
@@ -22,15 +13,15 @@ console.log(results);
           value={term}
           onChangeText={(newTerm) => {
             onTermChange(newTerm);
-            searchMarvel(newTerm);
+    
           }}
           autoCapitalize="none"
           autoCorrect={false}
           style={styles.inputStyle}
-          placeholder="thor"
+          placeholder="Search for your favourite character!"
         />
       </View>
-      {errorMessage &&  <Text>{errorMessage}</Text>} 
+
     </View>
   );
 };

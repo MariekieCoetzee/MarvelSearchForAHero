@@ -1,6 +1,7 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import SearchScreen from "./src/screens/SeachScreen";
+import CharacterScreen from "./src/screens/CharacterScreen";
 
 const navigator = createStackNavigator(
   {
@@ -8,7 +9,13 @@ const navigator = createStackNavigator(
       screen: SearchScreen,
       navigationOptions:{
         headerTitleAlign:"center"
-      }
+      }},
+      character: {
+        screen: CharacterScreen,
+        params:{character:""},
+        navigationOptions:{
+          headerTitleAlign:"center"
+        }
     }
   },
   {

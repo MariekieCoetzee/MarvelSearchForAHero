@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ScrollView,
   View,
@@ -7,24 +7,32 @@ import {
   StyleSheet,
 } from "react-native";
 import SearchBar from "../components/search/SearchBar";
+import Characters from "../components/search/Characters";
+import useAPIResults from "../hooks/useAPIResults";
 
-
-const SearchScreen = () => {
-  const [term, setTerm] = useState("thor");
-
+const SearchScreen = ({navigation}) => {
+  const [term, setTerm] = useState("");
+console.log(navigation);
   //get values from API
+  const [searchMarvel, results, errorMessage] = useAPIResults();
 
-
+  // Avoid Blank screen on start
+  useEffect(() => {
+    searchMarvel("A");
+  }, []);
+  
   return (
     <View>
       <SearchBar
         term={term}
-        onTermChange={setTerm}
-        // error={errorMessage}
-        // onTermSubmit={() => {
-        //   searchApi(term, searchLocation);
-        // }}
+        onTermChange={(value) => {
+          console.log(value);
+          setTerm(value);
+          searchMarvel(term);
+        }}
       />
+      {errorMessage && <Text>{errorMessage}</Text>}
+      <Characters items={results} navigation={navigation}/>
     </View>
   );
 };
