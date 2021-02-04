@@ -12,42 +12,29 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
 import NoImage from "react-native-vector-icons/Feather";
 
 const { width, height } = Dimensions.get("screen");
 const ITEM_SIZE = Platform.OS === "ios" ? width * 0.72 : width * 0.74;
 
-const image = (item) => {
-  let itemSplit = item.path.split("/");
-  if (itemSplit[itemSplit.length - 1] !== "image_not_available") {
-    let img = item.path + "/standard_small." + item.extension;
-    return <Image source={{ uri: img }} style={styles.imgStyle} />;
-  }
-  return <NoImage style={styles.iconStyle} name="image" />;
-};
-
 const Characters = ({ items, navigation }) => {
-  console.log(navigation);
   return (
     <SafeAreaView style={styles.viewStyle}>
-      <FlatList
+      <FlatList 
         data={items}
         keyExtractor={(item) => item.id.toString()}
         bounces={false}
-        renderItem={({ item, index, separators }) => {
+        renderItem={({ item, index }) => {
           return (
             <TouchableOpacity
               style={styles.touchableStyle}
               key={item.id.toString()}
-              onPress={() => navigation.navigate('character',{
-                character: item
-              })} 
+              onPress={() => {
+               console.log("add "+ item);
+              }}
             >
-              {image(item.thumbnail)}
               <View style={styles.nameBoxStyle}>
                 <Text style={styles.nameStyle}>{item.name}</Text>
-                <Text style={styles.descriptionStyle}>{item.description}</Text>
               </View>
             </TouchableOpacity>
           );
@@ -93,7 +80,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     margin: 10,
     padding: 10,
-    borderRadius:20,
+    borderRadius: 20,
     backgroundColor: "rgba(255,255,255,0.9)",
     shadowColor: "#000",
     shadowOffset: {

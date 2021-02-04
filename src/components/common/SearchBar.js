@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, TextInput, StyleSheet, Text } from "react-native";
 //import Feedback from "./common/Feedback";
 import Icon from "react-native-vector-icons/Feather";
 
-const SearchBar = ({ term, onTermChange }) => {
+const SearchBar = ({ term, onTermChange, placeHolder }) => {
 
   return (
     <View>
@@ -13,12 +13,11 @@ const SearchBar = ({ term, onTermChange }) => {
           value={term}
           onChangeText={(newTerm) => {
             onTermChange(newTerm);
-    
           }}
           autoCapitalize="none"
           autoCorrect={false}
           style={styles.inputStyle}
-          placeholder="Search for your favourite character!"
+          placeholder={placeHolder}
         />
       </View>
 

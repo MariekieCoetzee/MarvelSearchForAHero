@@ -6,29 +6,28 @@ import {
   RefreshControl,
   StyleSheet,
 } from "react-native";
-import SearchBar from "../components/search/SearchBar";
-import Characters from "../components/search/Characters";
-import useAPIResults from "../hooks/useAPIResults";
+import SearchBar from "../components/common/SearchBar";
+import Characters from "../components/characterSearch/Characters";
+import useSearchResults from "../hooks/useSearchResults";
 
 const SearchScreen = ({navigation}) => {
   const [term, setTerm] = useState("");
-console.log(navigation);
   //get values from API
-  const [searchMarvel, results, errorMessage] = useAPIResults();
+  const [searchMarvel, results, errorMessage] = useSearchResults();
 
   // Avoid Blank screen on start
   useEffect(() => {
-    searchMarvel("A");
+    searchMarvel("A", "character");
   }, []);
   
   return (
     <View>
       <SearchBar
         term={term}
+        placeHolder="Search for your favourite character!"
         onTermChange={(value) => {
-          console.log(value);
           setTerm(value);
-          searchMarvel(term);
+          searchMarvel(term,"character");
         }}
       />
       {errorMessage && <Text>{errorMessage}</Text>}
