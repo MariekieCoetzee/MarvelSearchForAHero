@@ -1,4 +1,4 @@
-# About the Disney application
+# Marvel Search For A Hero
 
 A list of Marvel characters is shown on startup.  The list can be refined by typing in your favourite characters name.  
 
@@ -25,6 +25,6 @@ Marvel api keys are required.  This can be generated after account was created, 
 
 The application should be ready to run!
 
-## Known issues
+# Known issues
 - Loading indicator required when waiting for API to respond to request.
 - Deleting a character from Statistics view is not implemented yet.
