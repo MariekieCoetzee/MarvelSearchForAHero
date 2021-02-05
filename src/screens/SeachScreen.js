@@ -18,7 +18,7 @@ const SearchScreen = ({ navigation }) => {
 
   // Avoid Blank screen on start
   useEffect(() => {
-    searchCharacter("A", "character");
+    searchCharacter(term, "character");
   }, [term]);
 
   return (
