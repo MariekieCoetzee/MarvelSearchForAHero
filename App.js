@@ -3,7 +3,7 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import SearchScreen from "./src/screens/SeachScreen";
-import CharacterScreen from "./src/screens/CharacterScreen";
+import CharacterScreen from "./src/screens/ComicScreen";
 import StatsScreen from "./src/screens/StatsScreen";
 
 const switchNavigator = createSwitchNavigator({
@@ -13,7 +13,6 @@ const switchNavigator = createSwitchNavigator({
         search: {
           screen: SearchScreen,
           navigationOptions: {
-            title: "MARVEL",
             headerTitleAlign: "center",
           },
         },
@@ -21,56 +20,58 @@ const switchNavigator = createSwitchNavigator({
           screen: CharacterScreen,
           params: { character: "", image: "" },
           navigationOptions: {
-            title: "MARVEL",
             headerTitleAlign: "center",
+            headerBackTitle: "Back",
           },
         },
       },
       {
         defaultNavigationOptions: {
+          initialRouteName: "search",
+          title: "MARVEL",
           //Header customization of the perticular Screen
           headerStyle: {
-            backgroundColor: "#42f44b",
+            backgroundColor: "#e62429",
           },
           headerTintColor: "#FFFFFF",
-          title: "Home",
-          //Header title
+          headerTitleStyle: {
+            fontSize: 30,
+            fontWeight: "700",
+          },
         },
       }
     ),
-    Statistics: createStackNavigator({
-      stats: {
-        screen: StatsScreen,
+    Statistics: createStackNavigator(
+      {
+        stats: {
+          screen: StatsScreen,
+
+          tabBarOptions: {
+            activeTintColor: "#42f44b",
+            inactiveTintColor: "black",
+            labelStyle: {
+              fontSize: 25,
+            },
+          },
+          //  tabBarIcon: ({ tintColor }) => <Ionicons name='ios-time' size={26} style={{ color: tintColor }} />
+        },
       },
-    }),
+      {
+        defaultNavigationOptions: {
+          title: "Character Statistics",
+          headerStyle: {
+            backgroundColor: "#e62429",
+          },
+          headerTintColor: "#FFFFFF",
+          headerTitleStyle: {
+            fontSize: 30,
+            fontWeight: "700",
+          },
+          tabBarOptions: { style: { fontSize: 25 } },
+        },
+      }
+    ),
   }),
-  // },{
-  //   defaultNavigationOptions: ({ navigation }) => ({//
-      // tabBarIcon: ({ focused, tintColor }) => {
-    //     const { routeName } = navigation.state;
-    //     let IconComponent = Ionicons;
-    //     let iconName;
-    //     if (routeName === 'Home') {
-    //       iconName = `ios-information-circle${focused ?
-    //         '' : '-outline'
-    //       }`;
-    //     } else if (routeName === 'Settings') {
-    //       iconName = `ios-checkmark-circle${focused ?
-    //         '' : '-outline'
-    //       }`;
-    //     }
-    //     return <IconComponent
-    //              name={iconName}
-    //              size={25}
-    //              color={tintColor}
-    //            />;
-    //   },
-    // }),
-    // tabBarOptions: {
-    //   activeTintColor: '#42f44b',
-    //   inactiveTintColor: 'gray',
-    // },
-//  }),
 });
 
 export default createAppContainer(switchNavigator);

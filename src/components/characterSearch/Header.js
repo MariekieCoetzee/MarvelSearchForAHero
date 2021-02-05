@@ -14,13 +14,11 @@ const ITEM_SIZE = Platform.OS === "ios" ? width * 0.72 : width * 0.74;
 const Header = ({ character, image, navigation }) => {
   return (
     <View style={styles.headerStyle}>
-      {image(character.thumbnail)}
-      <View style={styles.nameBoxStyle}>
+      {image(character.thumbnail,"/standard_medium.")}
+      <View style={styles.nameBoxStyle}> 
+     
         <Text style={styles.nameStyle}>{character.name}</Text>
         <Text style={styles.descriptionStyle}>{character.description}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("stats")}>
-          <Text>View Stats</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -36,13 +34,14 @@ const styles = StyleSheet.create({
       width: 0,
       height: 10,
     },
+    elevation:2,
     shadowOpacity: 0.9,
     shadowRadius: 5,
     padding: 10,
   },
   nameBoxStyle: {
     padding: 5,
-    width: ITEM_SIZE,
+    //width: ITEM_SIZE,
   },
   nameStyle: {
     fontSize: 23,

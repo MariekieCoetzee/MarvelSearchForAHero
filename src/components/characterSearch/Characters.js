@@ -17,10 +17,11 @@ import NoImage from "react-native-vector-icons/Feather";
 const { width, height } = Dimensions.get("screen");
 const ITEM_SIZE = Platform.OS === "ios" ? width * 0.72 : width * 0.74;
 
-const image = (item) => {
+//check if there is image and handle it
+const image = (item, size) => {
   let itemSplit = item.path.split("/");
   if (itemSplit[itemSplit.length - 1] !== "image_not_available") {
-    let img = item.path + "/standard_small." + item.extension;
+    let img = item.path + size + item.extension;
     return <Image source={{ uri: img }} style={styles.imgStyle} />;
   }
   return <NoImage style={styles.iconStyle} name="image" />;
@@ -29,7 +30,7 @@ const image = (item) => {
 const Characters = ({ items, navigation }) => {
   return (
     <SafeAreaView style={styles.viewStyle}>
-      <FlatList 
+      <FlatList
         data={items}
         keyExtractor={(item) => item.id.toString()}
         bounces={false}
@@ -38,14 +39,14 @@ const Characters = ({ items, navigation }) => {
             <TouchableOpacity
               style={styles.touchableStyle}
               key={item.id.toString()}
-              onPress={() => {
+              onPress={() => {                
                 navigation.navigate("character", {
                   character: item,
                   image: image,
                 });
               }}
             >
-              {image(item.thumbnail)}
+              {image(item.thumbnail, "/standard_medium.")}
               <View style={styles.nameBoxStyle}>
                 <Text style={styles.nameStyle}>{item.name}</Text>
                 <Text style={styles.descriptionStyle}>{item.description}</Text>
@@ -59,6 +60,7 @@ const Characters = ({ items, navigation }) => {
 };
 
 const styles = StyleSheet.create({
+
   viewStyle: {
     backgroundColor: "white",
   },
@@ -95,12 +97,13 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
     borderRadius: 20,
-    backgroundColor: "rgba(255,255,255,0.9)",
+    backgroundColor: "rgb(255,255,255)",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 10,
     },
+    elevation:2,
     shadowOpacity: 0.9,
     shadowRadius: 5,
   },

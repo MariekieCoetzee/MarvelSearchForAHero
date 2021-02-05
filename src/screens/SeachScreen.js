@@ -8,18 +8,19 @@ import {
 } from "react-native";
 import SearchBar from "../components/common/SearchBar";
 import Characters from "../components/characterSearch/Characters";
-import useSearchResults from "../hooks/useSearchResults";
+import useCharSearch from "../hooks/useCharSearch";
+import ErrorComponent from "../components/common/ErrorMessage";
 
-const SearchScreen = ({navigation}) => {
+const SearchScreen = ({ navigation }) => {
   const [term, setTerm] = useState("");
   //get values from API
-  const [searchMarvel, results, errorMessage] = useSearchResults();
+  const [searchCharacter, charResults, errorMessage] = useCharSearch();
 
   // Avoid Blank screen on start
   useEffect(() => {
-    searchMarvel("A", "character");
-  }, []);
-  
+    searchCharacter("A", "character");
+  }, [term]);
+
   return (
     <View>
       <SearchBar
@@ -27,15 +28,16 @@ const SearchScreen = ({navigation}) => {
         placeHolder="Search for your favourite character!"
         onTermChange={(value) => {
           setTerm(value);
-          searchMarvel(term,"character");
+          searchCharacter(term, "character");
         }}
       />
-      {errorMessage && <Text>{errorMessage}</Text>}
-      <Characters items={results} navigation={navigation}/>
+      {errorMessage && <ErrorComponent error={errorMessage}/>}
+      <Characters items={charResults} navigation={navigation} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+});
 
 export default SearchScreen;
