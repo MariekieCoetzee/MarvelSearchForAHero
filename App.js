@@ -1,9 +1,10 @@
 //https://reactnavigation.org/docs/4.x/tab-based-navigation
+import React from "react";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import SearchScreen from "./src/screens/SeachScreen";
-import CharacterScreen from "./src/screens/ComicScreen";
+import ProfileScreen from "./src/screens/ProfileScreen";
 import StatsScreen from "./src/screens/StatsScreen";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -16,39 +17,51 @@ const switchNavigator = createSwitchNavigator({
             screen: SearchScreen,
             navigationOptions: {
               headerTitleAlign: "center",
+              headerTitle: "MARVEL",
+              headerStyle: {
+                backgroundColor: "#e62429",
+              },
+              headerTintColor: "#FFFFFF",
+              headerTitleStyle: {
+                fontSize: 30,
+                fontWeight: "700",
+              },
             },
           },
           character: {
-            screen: CharacterScreen,
+            screen: ProfileScreen,
             params: { character: "", image: "" },
             navigationOptions: {
+              headerTitle: "PROFILE",
               headerTitleAlign: "center",
               headerBackTitle: "Back",
+              headerStyle: {
+                backgroundColor: "#e62429",
+              },
+              headerTintColor: "#FFFFFF",
+              headerTitleStyle: {
+                fontSize: 30,
+                fontWeight: "700",
+              },
             },
           },
         },
+
         {
-          defaultNavigationOptions: {
+          navigationOptions: {
             initialRouteName: "search",
-            title: "MARVEL",
             //Header customization of the perticular Screen
-            headerStyle: {
-              backgroundColor: "#e62429",
-            },
-            headerTintColor: "#FFFFFF",
-            headerTitleStyle: {
-              fontSize: 30,
-              fontWeight: "700",
-            },
-            
-              tabBarOptions: {
-                showIcon: true,
-              },
+
             tabBarIcon: ({ tintColor, focused }) => (
               <Icon
                 name={focused ? "home" : "home-outline"}
                 size={26}
-                style={{ width: 30, height: 30,color: tintColor }}
+                style={{
+                  width: 30,
+                  height: 30,
+                  color: tintColor,
+                  fontWeight: "600",
+                }}
               />
             ),
           },
@@ -58,7 +71,18 @@ const switchNavigator = createSwitchNavigator({
         {
           stats: {
             screen: StatsScreen,
-
+            navigationOptions: {
+              title: "STATISTICS",
+              headerStyle: {
+                backgroundColor: "#e62429",
+              },
+              headerTitleAlign: "center",
+              headerTintColor: "#FFFFFF",
+              headerTitleStyle: {
+                fontSize: 30,
+                fontWeight: "700",
+              },
+            },
             tabBarOptions: {
               activeTintColor: "#42f44b",
               inactiveTintColor: "black",
@@ -66,11 +90,10 @@ const switchNavigator = createSwitchNavigator({
                 fontSize: 25,
               },
             },
-            //  tabBarIcon: ({ tintColor }) => <Ionicons name='ios-time' size={26} style={{ color: tintColor }} />
           },
         },
         {
-          defaultNavigationOptions: {
+          navigationOptions: {
             title: "STATISTICS",
             headerStyle: {
               backgroundColor: "#e62429",
@@ -81,6 +104,19 @@ const switchNavigator = createSwitchNavigator({
               fontSize: 30,
               fontWeight: "700",
             },
+
+            tabBarIcon: ({ focused, tintColor }) => (
+              <Icon
+                name={focused ? "ios-bar-chart" : "ios-bar-chart-outline"}
+                size={26}
+                style={{
+                  width: 30,
+                  height: 30,
+                  color: tintColor,
+                  fontWeight: "600",
+                }}
+              />
+            ),
           },
         }
       ),
@@ -91,9 +127,11 @@ const switchNavigator = createSwitchNavigator({
         inactiveTintColor: "#222624",
         showIcon: true,
         labelStyle: {
-          fontSize: 25,
+          fontSize: 10,
+          paddingTop: 5,
         },
         style: {
+          paddingTop: 15,
           backgroundColor: "#e62429",
         },
       },
