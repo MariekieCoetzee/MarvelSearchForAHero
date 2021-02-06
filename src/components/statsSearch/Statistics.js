@@ -13,7 +13,8 @@ import {
 import Icon from "react-native-vector-icons/Feather";
 import { LineChart } from "react-native-chart-kit";
 
-const StatsSelectedList = ({ items }) => {
+const StatsSelectedList = ({ items, searchAPI }) => {
+
 return (
   <View style={{marginBottom: 100}}>
     <FlatList
@@ -34,7 +35,7 @@ return (
               </Text>
               <TouchableOpacity style={{ paddingTop: 6, marginLeft: 20 }}
               onPress={()=>{
-                items.filter(x => x.id !== items.id);
+                searchAPI(item.id,"remove");
               }}
               >
                 <Icon name="trash-2" color="red" style={{ fontSize: 20 }} />

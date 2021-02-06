@@ -9,24 +9,27 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Statistics from "./Statistics";
-import useStatsSearch from "../../hooks/useStatsSearch";
+import useAPISearch from "../../hooks/useAPISearch";
 import { useEffect } from "react";
 import ErrorComponent from "../common/ErrorMessage";
-const StatsSearchResults = ({ searchResults }) => {
+
+
+const StatsSearchResults = ({ results }) => {
   const [showHideFlat, setShowHideFlat] = useState("flex");
-  const [searchStats, statsResult, errorMessage] = useStatsSearch();
+  const [searchAPI, searchResults, errorMessage] = useAPISearch();
 
   useEffect(() => {
     //show list when results change
     setShowHideFlat("flex");
-  }, [searchResults]);
+  }, [results]);
+
   return (
     <View>
       {errorMessage && <ErrorComponent error={errorMessage}/>}
       <SafeAreaView style={styles.backgroundStyle}>
         <FlatList
           style={{ display: showHideFlat }}
-          data={searchResults}
+          data={results}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => {
             return (
@@ -34,10 +37,10 @@ const StatsSearchResults = ({ searchResults }) => {
                 key={item.id.toString()}
                 onPress={() => {
                   //check existing selections
-                  const existing = statsResult.find(
+                  const existing = searchResults.find(
                     (i) => i.name === item.name
                   );
-                  existing == null ? searchStats(item.name, "stats") : null;
+                  existing == null ? searchAPI(item.name, "stats") : null;
                   setShowHideFlat("none");
                 }}
               >
@@ -50,7 +53,7 @@ const StatsSearchResults = ({ searchResults }) => {
           }}
         />
       </SafeAreaView>
-      <Statistics items={statsResult} />
+      <Statistics items={searchResults} searchAPI={searchAPI} />
     </View>
   );
 };

@@ -8,17 +8,17 @@ import {
 } from "react-native";
 import SearchBar from "../components/common/SearchBar";
 import Characters from "../components/characterSearch/Characters";
-import useCharSearch from "../hooks/useCharSearch";
+import useStatsSearch from "../hooks/useAPISearch";
 import ErrorComponent from "../components/common/ErrorMessage";
 
 const SearchScreen = ({ navigation }) => {
   const [term, setTerm] = useState("");
   //get values from API
-  const [searchCharacter, charResults, errorMessage] = useCharSearch();
+  const [searchAPI, searchResults, errorMessage] = useStatsSearch();
 
   // Avoid Blank screen on start
   useEffect(() => {
-    searchCharacter(term, "character");
+    searchAPI(term, "character");
   }, [term]);
 
   return (
@@ -28,11 +28,11 @@ const SearchScreen = ({ navigation }) => {
         placeHolder="Search for your favourite character!"
         onTermChange={(value) => {
           setTerm(value);
-          searchCharacter(term, "character");
+          searchAPI(term, "character");
         }}
       />
       {errorMessage && <ErrorComponent error={errorMessage}/>}
-      <Characters items={charResults} navigation={navigation} />
+      <Characters items={searchResults} navigation={navigation} />
     </View>
   );
 };
