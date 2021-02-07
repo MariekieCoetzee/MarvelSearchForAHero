@@ -29,7 +29,7 @@ export default () => {
         if (items.data.results.length == 0) {
           setErrorMessage({
             message:
-              "O no!  Galactus must've ate your search!  Try again, maybe you are lucky...",
+              "Oh no!  Galactus must've ate your search!  Try again, maybe you are lucky...",
             info: "Nothing was found",
             icon: "book-dead",
           });
@@ -48,9 +48,9 @@ export default () => {
       } else {
         setErrorMessage({
           message:
-            "O dear.. Hulk got angry and destroyed your search. Please try again",
+            "Oh dear.. Hulk got angry and destroyed your search. Please try again",
           info: "",
-          icon: "deathly-hallows",
+          icon: "angry",
         });
         setSearchResults([]);
       }

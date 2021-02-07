@@ -3,6 +3,7 @@ import { View, Dimensions, StyleSheet, Image } from "react-native";
 
 const { width, height } = Dimensions.get("screen");
 //check if there is image and handle it
+//to merge images with ImageHelper
 const backDropImage = (item, size) => {
   let itemSplit = item.path.split("/");
   if (itemSplit[itemSplit.length - 1] !== "image_not_available") {

@@ -28,7 +28,7 @@ const switchNavigator = createSwitchNavigator({
               },
             },
           },
-          character: {
+          profile: {
             screen: ProfileScreen,
             params: { character: "", image: "" },
             navigationOptions: {
@@ -84,8 +84,8 @@ const switchNavigator = createSwitchNavigator({
               },
             },
             tabBarOptions: {
-              activeTintColor: "#42f44b",
-              inactiveTintColor: "black",
+              activeTintColor: "#e62429",
+              inactiveTintColor: "#222624",
               labelStyle: {
                 fontSize: 25,
               },
@@ -94,7 +94,7 @@ const switchNavigator = createSwitchNavigator({
         },
         {
           navigationOptions: {
-            title: "STATISTICS",
+            title: "Statistics",
             headerStyle: {
               backgroundColor: "#e62429",
             },

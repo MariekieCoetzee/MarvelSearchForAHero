@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Disney",
-    "slug": "Disney",
+    "name": "Find a Marvel Super Hero",
+    "slug": "MarvelSuperHero",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
