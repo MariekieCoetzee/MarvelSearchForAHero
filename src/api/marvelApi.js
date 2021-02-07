@@ -1,10 +1,10 @@
 //https://api.jquery.com/map/  - create comma separated list for characterlist
 import { MD5 } from "react-native-crypto-js";
-import { privateKey, publicKey } from "@env";
+//import { privateKey, publicKey } from "@env";
 
 
-// const privateKey ="<set the Private key here>"
-// const publicKey = "<set the Public key here>"
+const privateKey ="<set the Private key here>"
+const publicKey = "<set the Public key here>"
 const generateHash = (timestamp, privateKey, publicKey) =>
   MD5(`${timestamp}${privateKey}${publicKey}`);
 
