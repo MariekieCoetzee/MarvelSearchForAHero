@@ -7,26 +7,31 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import Statistics from "./Statistics";
-import useStatsSearch from "../../hooks/useStatsSearch";
+import useAPISearch from "../../hooks/useAPISearch";
 import { useEffect } from "react";
 import ErrorComponent from "../common/ErrorMessage";
-const StatsSearchResults = ({ searchResults }) => {
-  const [showHideFlat, setShowHideFlat] = useState("flex");
-  const [searchStats, statsResult, errorMessage] = useStatsSearch();
+
+const { width, height } = Dimensions.get("screen");
+const StatsSearchResults = ({ results }) => {
+  const [showHideFlat, setShowHideFlat] = useState("none");
+  const [searchAPI, searchResults, errorMessage] = useAPISearch();
 
   useEffect(() => {
     //show list when results change
-    setShowHideFlat("flex");
-  }, [searchResults]);
+ 
+    results.length == 0 ? setShowHideFlat("none") : setShowHideFlat("flex");
+  }, [results]);
+
   return (
-    <View>
-      {errorMessage && <ErrorComponent error={errorMessage}/>}
+    <View style={styles.containerStyle}>
+      {errorMessage && <ErrorComponent error={errorMessage} />}
       <SafeAreaView style={styles.backgroundStyle}>
         <FlatList
-          style={{ display: showHideFlat }}
-          data={searchResults}
+          style={[styles.flatlistStyle],{display: showHideFlat}}
+          data={results}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => {
             return (
@@ -34,42 +39,56 @@ const StatsSearchResults = ({ searchResults }) => {
                 key={item.id.toString()}
                 onPress={() => {
                   //check existing selections
-                  const existing = statsResult.find(
+                  const existing = searchResults.find(
                     (i) => i.name === item.name
                   );
-                  existing == null ? searchStats(item.name, "stats") : null;
+                  existing == null ? searchAPI(item.name, "stats") : null;
                   setShowHideFlat("none");
                 }}
               >
-                <View style={styles.viewResultStyle}>
+                <View style={[styles.viewResultStyle]}>
                   <Text style={styles.charResultStyle}>{item.name}</Text>
-                  <Text style={styles.charTipStyle}>Tap to select</Text>
+                  <Text style={styles.charTipStyle}>Tap to view chart</Text>
                 </View>
               </TouchableOpacity>
             );
           }}
         />
       </SafeAreaView>
-      <Statistics items={statsResult} />
+      {showHideFlat == "none" ? (
+        <Statistics items={searchResults} searchAPI={searchAPI} />
+      ) : null}
     </View>
   );
 };
 const styles = StyleSheet.create({
+  flatlistStyle:{
+    
+    height: height * 0.4,
+    position: "relative",
+  },
+  containerStyle: {
+    backgroundColor: "#222624",
+    height,
+  },
   backgroundStyle: {
     backgroundColor: "#fff",
-    borderRadius: 5,
+    borderBottomRightRadius: 5,
+    borderBottomLeftRadius: 5,
     flexDirection: "row",
-    marginBottom: 1,
+    marginLeft: 50,
+    marginRight: 50,
   },
   viewResultStyle: {
-    margin: 15,
-    flexDirection: "row",
+    margin: 10,
+    borderBottomWidth: 0.5,
+    borderColor: "#e62429",
   },
   charResultStyle: {
-    fontSize: 20,
+    fontSize: 15,
   },
   charTipStyle: {
-    padding: 5,
+    padding: 2,
     color: "blue",
     fontStyle: "italic",
   },

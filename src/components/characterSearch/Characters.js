@@ -1,4 +1,3 @@
-//styling insperation : https://www.youtube.com/watch?v=F8x-dyIsrJ8&t=51s
 //https://reactnative.dev/docs/flatlist
 
 import React from "react";
@@ -12,44 +11,35 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import NoImage from "react-native-vector-icons/Feather";
-
+import imageHelper from "../helpers/imageHelper";
 const { width, height } = Dimensions.get("screen");
-const ITEM_SIZE = Platform.OS === "ios" ? width * 0.72 : width * 0.74;
-
-//check if there is image and handle it
-const image = (item, size) => {
-  let itemSplit = item.path.split("/");
-  if (itemSplit[itemSplit.length - 1] !== "image_not_available") {
-    let img = item.path + size + item.extension;
-    return <Image source={{ uri: img }} style={styles.imgStyle} />;
-  }
-  return <NoImage style={styles.iconStyle} name="image" />;
-};
+const ITEM_SIZE = Platform.OS === "ios" ? width * 0.45 : width * 0.43;
 
 const Characters = ({ items, navigation }) => {
   return (
     <SafeAreaView style={styles.viewStyle}>
       <FlatList
         data={items}
+        numColumns={2}
         keyExtractor={(item) => item.id.toString()}
-        bounces={false}
+        bounces={true}
         renderItem={({ item, index }) => {
           return (
             <TouchableOpacity
               style={styles.touchableStyle}
               key={item.id.toString()}
-              onPress={() => {                
-                navigation.navigate("character", {
+              onPress={() => {
+                navigation.navigate("profile", {
                   character: item,
-                  image: image,
                 });
               }}
             >
-              {image(item.thumbnail, "/standard_medium.")}
+              <View style={{ justifyContent: "center" }}>
+                {imageHelper(item.thumbnail, "/standard_large.", "characters", ITEM_SIZE)}
+              </View>
               <View style={styles.nameBoxStyle}>
                 <Text style={styles.nameStyle}>{item.name}</Text>
-                <Text style={styles.descriptionStyle}>{item.description}</Text>
+                <Text style={styles.profileStyle}>View Profile</Text>
               </View>
             </TouchableOpacity>
           );
@@ -60,52 +50,44 @@ const Characters = ({ items, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-
   viewStyle: {
-    backgroundColor: "white",
+    backgroundColor: "#222624",
+    height,
   },
-  iconStyle: {
-    width: 70,
-    height: 70,
-    borderRadius: 25,
-    fontSize: 55,
-    color: "grey",
-  },
-  imgStyle: {
-    width: 70,
-    height: 70,
-    borderRadius: 25,
-    alignSelf: "center",
-    borderColor: "grey",
-    borderWidth: 1,
-  },
+
   nameBoxStyle: {
-    padding: 5,
+    position: "absolute",
     width: ITEM_SIZE,
+    bottom: 0,
+    overflow: "hidden",
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
+  profileStyle: {
+    backgroundColor: "#e62429",
+    color: "white",
+    fontSize: 15,
+    padding: 8,
+    fontWeight: "600",
+    textAlign: "center",
   },
   nameStyle: {
-    fontSize: 23,
-    marginBottom: 5,
+    color: "white",
+    padding: 10,
+    backgroundColor: "rgba(34,38,36,0.7)",
+    fontSize: 15,
     fontWeight: "600",
-  },
-  descriptionStyle: {
-    fontSize: 10,
+    textAlign: "center",
   },
   touchableStyle: {
-    flexDirection: "row",
+    flexDirection: "column",
+    justifyContent: "center",
     alignContent: "center",
+    width: ITEM_SIZE,
+    height: 180,
     margin: 10,
-    padding: 10,
-    borderRadius: 20,
+    borderRadius: 25,
     backgroundColor: "rgb(255,255,255)",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    elevation:2,
-    shadowOpacity: 0.9,
-    shadowRadius: 5,
   },
 });
 
