@@ -23,8 +23,5 @@ The following additional packages were installed :
 
 Marvel api keys are required.  This can be generated after account was created, on https://developer.marvel.com/.  Update 'src\api\marvelApi.js' public & private const with these keys.
 
-The application should be ready to run!
+The application will be ready to run!
 
-# Known issues
-- Loading indicator required when waiting for API to respond to request.
-- Deleting a character from Statistics view is not implemented yet.
