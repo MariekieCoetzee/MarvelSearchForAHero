@@ -1,14 +1,8 @@
 //https://reactnavigation.org/docs/params/
 import React, { useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Dimensions,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList, Dimensions } from "react-native";
 import Header from "../components/characterSearch/Header";
- import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
 import useAPISearch from "../hooks/useAPISearch";
 import ErrorComponent from "../components/common/ErrorMessage";
 import BackDrop from "../components/profile/BackDrop";
@@ -16,7 +10,7 @@ import Comics from "../components/profile/Comics";
 
 const { width, height } = Dimensions.get("screen");
 
-const ProfileScreen = ({ route, navigation }) => {
+const ProfileScreen = ({ navigation }) => {
   const { character } = navigation.state.params;
 
   const [searchAPI, searchResults, errorMessage] = useAPISearch();
@@ -26,7 +20,7 @@ const ProfileScreen = ({ route, navigation }) => {
   }, [character]);
 
   return (
-    <View style={{backgroundColor:"#222624", height}}>
+    <View style={{ backgroundColor: "#222624", height }}>
       <BackDrop image={character.thumbnail} />
       <Header character={character} navigation={navigation} />
 
@@ -46,7 +40,7 @@ const ProfileScreen = ({ route, navigation }) => {
           data={searchResults}
           horizontal
           keyExtractor={(item) => item.resourceURI}
-          renderItem={({ item, index }) => {
+          renderItem={({ item }) => {
             return <Comics item={item} />;
           }}
         />
@@ -55,7 +49,6 @@ const ProfileScreen = ({ route, navigation }) => {
   );
 };
 const styles = StyleSheet.create({
-
   tabStyle: {
     width,
     //marginTop: 2,

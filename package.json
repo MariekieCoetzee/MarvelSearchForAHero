@@ -8,7 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.9.2",
     "expo": "~40.0.0",
     "expo-linear-gradient": "^8.4.0",
@@ -23,17 +23,25 @@
     "react-native-dotenv": "^2.5.1",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-reanimated": "~1.13.0",
+    "react-native-redash": "^15.0.0",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "~2.15.2",
     "react-native-svg": "^12.1.0",
     "react-native-vector-icons": "^8.0.0",
     "react-native-web": "~0.13.12",
-    "react-navigation": "^4.4.3",
-    "react-navigation-stack": "^2.10.2",
-    "react-navigation-tabs": "^2.10.1"
+    "react-navigation": "^4.4.4",
+    "react-navigation-stack": "^2.10.4",
+    "react-navigation-tabs": "^2.11.0",
+    "rn-placeholder": "^3.0.3"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "electron": "^11.1.0",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "prettier": "^2.2.1"
   },
   "private": true
 }

@@ -1,5 +1,3 @@
-//https://reactnative.dev/docs/flatlist
-
 import React from "react";
 import {
   SafeAreaView,
@@ -7,51 +5,62 @@ import {
   View,
   StyleSheet,
   FlatList,
+  Platform,
   TouchableOpacity,
-  Image,
   Dimensions,
 } from "react-native";
+import PlaceholderCharacters from "./PlaceholderCharacters";
 import imageHelper from "../helpers/imageHelper";
+
 const { width, height } = Dimensions.get("screen");
 const ITEM_SIZE = Platform.OS === "ios" ? width * 0.45 : width * 0.43;
 
 const Characters = ({ items, navigation }) => {
   return (
     <SafeAreaView style={styles.viewStyle}>
-      <FlatList
-        data={items}
-        numColumns={2}
-        keyExtractor={(item) => item.id.toString()}
-        bounces={true}
-        renderItem={({ item, index }) => {
-          return (
-            <TouchableOpacity
-              style={styles.touchableStyle}
-              key={item.id.toString()}
-              onPress={() => {
-                navigation.navigate("profile", {
-                  character: item,
-                });
-              }}
-            >
-              <View style={{ justifyContent: "center" }}>
-                {imageHelper(item.thumbnail, "/standard_large.", "characters", ITEM_SIZE)}
-              </View>
-              <View style={styles.nameBoxStyle}>
-                <Text style={styles.nameStyle}>{item.name}</Text>
-                <Text style={styles.profileStyle}>View Profile</Text>
-              </View>
-            </TouchableOpacity>
-          );
-        }}
-      />
+      {typeof items == "undefined" || items.length == 0 ? (
+        <PlaceholderCharacters size={ITEM_SIZE} />
+      ) : (
+        <FlatList
+          data={items}
+          numColumns={2}
+          keyExtractor={(item) => item.id.toString()}
+          bounces={true}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                style={styles.touchableStyle}
+                key={item.id.toString()}
+                onPress={() => {
+                  navigation.navigate("profile", {
+                    character: item,
+                  });
+                }}
+              >
+                <View style={{ justifyContent: "center" }}>
+                  {imageHelper(
+                    item.thumbnail,
+                    "/standard_large.",
+                    "characters",
+                    ITEM_SIZE
+                  )}
+                </View>
+                <View style={styles.nameBoxStyle}>
+                  <Text style={styles.nameStyle}>{item.name}</Text>
+                  <Text style={styles.profileStyle}>View Profile</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      )}
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   viewStyle: {
-    backgroundColor: "#222624",
+    backgroundColor: "rgba(0,0,0,0.7)",
     height,
   },
 
@@ -72,9 +81,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   nameStyle: {
-    color: "white",
+    color: "black",
     padding: 10,
-    backgroundColor: "rgba(34,38,36,0.7)",
+    backgroundColor: "rgba(255,255,255,0.7)",
     fontSize: 15,
     fontWeight: "600",
     textAlign: "center",

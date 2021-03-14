@@ -1,4 +1,5 @@
 //https://reactnavigation.org/docs/4.x/tab-based-navigation
+// implement later version of navigation
 import React from "react";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -138,5 +139,4 @@ const switchNavigator = createSwitchNavigator({
     }
   ),
 });
-
 export default createAppContainer(switchNavigator);

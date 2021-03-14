@@ -14,3 +14,6 @@ web-build/
 .env
 .gitignore
 *.gif
+src/api/marvelApi.js
+run/.expo/settings.json
+.vscode/launch.json
