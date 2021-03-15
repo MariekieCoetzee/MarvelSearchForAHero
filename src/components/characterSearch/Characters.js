@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  SafeAreaView,
   Text,
   View,
   StyleSheet,
@@ -17,12 +16,13 @@ const ITEM_SIZE = Platform.OS === "ios" ? width * 0.45 : width * 0.43;
 
 const Characters = ({ items, navigation }) => {
   return (
-    <SafeAreaView style={styles.viewStyle}>
+    <View style={styles.viewStyle}>
       {typeof items == "undefined" || items.length == 0 ? (
         <PlaceholderCharacters size={ITEM_SIZE} />
       ) : (
         <FlatList
           data={items}
+          contentContainerStyle={{ paddingBottom: 100 }}
           numColumns={2}
           keyExtractor={(item) => item.id.toString()}
           bounces={true}
@@ -54,14 +54,13 @@ const Characters = ({ items, navigation }) => {
           }}
         />
       )}
-    </SafeAreaView>
+    </View>
   );
 };
-
 const styles = StyleSheet.create({
   viewStyle: {
+    flexGrow: 1,
     backgroundColor: "rgba(0,0,0,0.7)",
-    height,
   },
 
   nameBoxStyle: {
@@ -94,6 +93,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     width: ITEM_SIZE,
     height: 180,
+    flex: 1,
     margin: 10,
     borderRadius: 25,
     backgroundColor: "rgb(255,255,255)",

@@ -1,10 +1,18 @@
 import React from "react";
-import {View, Text, StyleSheet, Dimensions, Image} from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Platform,
+} from "react-native";
+import NoImage from "../helpers/imageHelper";
 
-const { width, height } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 //create card layout
 const ITEM_SIZE = Platform.OS === "ios" ? width * 0.72 : width * 0.74;
-const Comics =({item})=>{
+const Comics = ({ item }) => {
   //check if there is image and handle it
   //TODO move this into imageHelper.
   const comicImage = (item, size) => {
@@ -15,62 +23,60 @@ const Comics =({item})=>{
     }
     return <NoImage style={styles.iconStyle} name="image" />;
   };
-    return (
-        <View
-        style={{
-          width: ITEM_SIZE,
-          margin: 10,
+  return (
+    <View
+      style={{
+        width: ITEM_SIZE,
+        margin: 10,
         //   backgroundColor: "white",
         //   borderRadius: 34,
-        }}
-      >
-        {item.images[0]
-          ? comicImage(item.images[0], "standard_fantastic")
-          : null}
-        <View style={styles.nameBoxStyle}>
-          <Text
-            style={{
-              fontWeight: "900",
-              fontSize: 25,
-              textAlign: "center",
-              color: "white",
-            }}
-          >
-            {item.title}
-          </Text>
-          {/* <Text>{item.description}</Text> */}
-        </View>
+      }}
+    >
+      {item.images[0] ? comicImage(item.images[0], "standard_fantastic") : null}
+      <View style={styles.nameBoxStyle}>
+        <Text
+          style={{
+            fontWeight: "900",
+            fontSize: 25,
+            textAlign: "center",
+            color: "white",
+          }}
+        >
+          {item.title}
+        </Text>
+        {/* <Text>{item.description}</Text> */}
       </View>
-    )
-}
+    </View>
+  );
+};
 
-const styles=StyleSheet.create({
-    nameBoxStyle: {
-        backgroundColor: "rgba(34,38,36,0.7)",
-        position: "absolute",
-        width: ITEM_SIZE,
-        bottom: 0,
-        padding: 10,
-        overflow: "hidden",
-        borderBottomRightRadius: 20,
-        borderBottomLeftRadius: 20,
-      },
-      cardImageStyle: {
-        height: ITEM_SIZE, //,
-        width: ITEM_SIZE,
-        // resizeMode: "cover",
-        borderColor: "white",
-        borderWidth: 1,
-        alignSelf: "center",
-        borderRadius: 24,
-        margin: 0,
-        marginBottom: 5,
-      },
-      cardContainer: {
-        alignItems: "center",
-        backgroundColor: "white",
-        borderRadius: 34,
-      },
+const styles = StyleSheet.create({
+  nameBoxStyle: {
+    backgroundColor: "rgba(34,38,36,0.7)",
+    position: "absolute",
+    width: ITEM_SIZE,
+    bottom: 0,
+    padding: 10,
+    overflow: "hidden",
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
+  },
+  cardImageStyle: {
+    height: ITEM_SIZE, //,
+    width: ITEM_SIZE,
+    // resizeMode: "cover",
+    borderColor: "white",
+    borderWidth: 1,
+    alignSelf: "center",
+    borderRadius: 24,
+    margin: 0,
+    marginBottom: 5,
+  },
+  cardContainer: {
+    alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 34,
+  },
 });
 
-export default Comics
+export default Comics;

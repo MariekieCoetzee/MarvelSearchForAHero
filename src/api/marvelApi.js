@@ -2,7 +2,6 @@
 import { MD5 } from "react-native-crypto-js";
 import { privateKey, publicKey } from "@env";
 
-
 // const privateKey ="<set the Private key here>"
 // const publicKey = "<set the Public key here>"
 const generateHash = (timestamp, privateKey, publicKey) =>
@@ -14,16 +13,16 @@ const marvelApi = async (term, searchType) => {
   let param = "";
   let url = "";
   if (searchType === "comic") {
-    param = `/${term}/comics?apikey=${publicKey}&ts=${timestamp}&hash=${hash}&limit=25`;
+    param = `/${term}/comics?apikey=${publicKey}&ts=${timestamp}&hash=${hash}&limit=26`;
   } else if (searchType === "character") {
     if (term !== "") {
-      param = `?apikey=${publicKey}&ts=${timestamp}&hash=${hash}&nameStartsWith=${term}&limit=25`;
+      param = `?apikey=${publicKey}&ts=${timestamp}&hash=${hash}&nameStartsWith=${term}&limit=26`;
     } else {
-      param = `?apikey=${publicKey}&ts=${timestamp}&hash=${hash}&limit=25`;
+      param = `?apikey=${publicKey}&ts=${timestamp}&hash=${hash}&limit=26`;
     }
   } else {
     searchType === "stats";
-    param = `?apikey=${publicKey}&ts=${timestamp}&hash=${hash}&name=${term}&limit=25`;
+    param = `?apikey=${publicKey}&ts=${timestamp}&hash=${hash}&name=${term}&limit=26`;
   }
 
   url = `https://gateway.marvel.com/v1/public/characters${param}`;

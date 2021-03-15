@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import marvelApi from "../api/marvelApi";
 
 export default () => {
@@ -15,7 +15,6 @@ export default () => {
 
     try {
       const items = await marvelApi(searchChar, searchType);
-
       if (items.error) {
         setErrorMessage({
           message:
