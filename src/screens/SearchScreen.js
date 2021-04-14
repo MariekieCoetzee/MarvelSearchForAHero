@@ -31,13 +31,12 @@ const SearchScreen = ({ navigation }) => {
           searchAPI(term, "character");
         }}
       />
-      {errorMessage && <ErrorComponent error={errorMessage}/>}
+      {errorMessage && <ErrorComponent error={errorMessage} />}
       <Characters items={searchResults} navigation={navigation} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-});
+const styles = StyleSheet.create({});
 
 export default SearchScreen;
